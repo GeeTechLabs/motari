@@ -8,12 +8,17 @@ function required(name: string): string {
   return value ?? "";
 }
 
+function optional(name: string, fallback = ""): string {
+  return process.env[name] || fallback;
+}
+
 export const env = {
-  appId: required("APP_ID"),
-  appSecret: required("APP_SECRET"),
+  appId: optional("APP_ID"),
+  appSecret: optional("APP_SECRET", "motari-secret-key-production-fallback"),
   isProduction: process.env.NODE_ENV === "production",
   databaseUrl: required("DATABASE_URL"),
-  kimiAuthUrl: required("KIMI_AUTH_URL"),
-  kimiOpenUrl: required("KIMI_OPEN_URL"),
-  ownerUnionId: process.env.OWNER_UNION_ID ?? "",
+  kimiAuthUrl: optional("KIMI_AUTH_URL"),
+  kimiOpenUrl: optional("KIMI_OPEN_URL"),
+  ownerUnionId: optional("OWNER_UNION_ID"),
+  adminPassword: optional("ADMIN_PASSWORD", "motari2026!"),
 };

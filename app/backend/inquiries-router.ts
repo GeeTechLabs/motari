@@ -75,7 +75,7 @@ export const inquiriesRouter = createRouter({
         sharePhone: input.sharePhone,
         phone: input.sharePhone ? input.phone! : null, // hard privacy guarantee
       })
-      .$returningId();
+      .returning({ id: inquiries.id });
 
     if (input.requestCarId) {
       await db

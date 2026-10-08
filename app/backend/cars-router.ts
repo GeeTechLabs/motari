@@ -95,7 +95,7 @@ export const carsRouter = createRouter({
 
   create: adminQuery.input(carInput).mutation(async ({ input }) => {
     const db = getDb();
-    const [{ id }] = await db.insert(cars).values(input).$returningId();
+    const [{ id }] = await db.insert(cars).values(input).returning({ id: cars.id });
     return db.query.cars.findFirst({ where: eq(cars.id, id) });
   }),
 

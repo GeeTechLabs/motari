@@ -1,0 +1,7 @@
+{
+  "buildCommand": "vite build && esbuild backend/vercel.ts --platform=node --bundle --format=esm --outfile=api/index.js --alias:@contracts=./contracts --alias:@db=./db --banner:js=\"import { createRequire } from 'module';const require = createRequire(import.meta.url);\"",
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
+  ]
+}
